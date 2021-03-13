@@ -355,7 +355,10 @@ gulp.task('mainjs', function() {
 * npm isntall gulp-clean-css@3.0.3
   * gulp minify-css
 
-### 6-2 使用gulp-concat来合并css文件和css的自动化构建 (04:35)
+### 6-2 使用gulp-concat来合并css文件和css的自动化构建
+* npm install gulp-concat@2.6.1
+  
+
 ### 6-3 SASS 来帮忙-1 SASS的介绍 (07:45)
 ### 6-4 SASS 来帮忙-2 使用gulp-sass来编译SASS代码 (06:36)
 ### 6-5 总结 (02:02)

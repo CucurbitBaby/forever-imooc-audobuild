@@ -10,11 +10,12 @@ var gif = require('gulp-if');
 var coffee = require('gulp-coffee')
 var babel = require('gulp-babel')
 var cleanCss = require('gulp-clean-css')
+var concat = require('gulp-concat')
 
 // nprocess.env是node预设置
 var isProduction = process.env.ENV === 'prod';
 gulp.task('default', function() {
-	sequence('babel', 'babelWatch', 'mainjs');
+	sequence('minify-css', 'minify-css-watch', 'babel', 'babelWatch', 'mainjs');
 });
 
 gulp.task('mainjs', function() {
@@ -76,6 +77,11 @@ gulp.task('minify-css', function() {
     './assets/css/bootstrap-theme.css',
     './assets/css/bootstrap.css',
     './assets/css/index.css'])
+    .pipe(concat('main.css'))
     .pipe(cleanCss())
     .pipe(gulp.dest('css/'))
+})
+
+gulp.task('minify-css-watch', function() {
+  gulp.watch('./assets/css/*.css', ['minify-css'])
 })
