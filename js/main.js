@@ -13,13 +13,16 @@ module.exports = ['$scope', function($scope) {
   }
 }]
 },{}],2:[function(require,module,exports){
+angular = require('angular');
+_ = require('lodash');
+
 angular
 .module('TodoList', [])
 .controller('TodosController', require('./todos-controller.js'))
 .controller('AddTodoController', require('./add-todo-controller.js'))
 .controller('TodoController', require('./todo-controller.js'))
 
-},{"./add-todo-controller.js":1,"./todo-controller.js":3,"./todos-controller.js":4}],3:[function(require,module,exports){
+},{"./add-todo-controller.js":1,"./todo-controller.js":3,"./todos-controller.js":4,"angular":"angular","lodash":"lodash"}],3:[function(require,module,exports){
 module.exports = ['$scope', function($scope) {
   $scope.deleteTodo = function(deleteTodo) {
     _.remove($scope.todos, function(todo){

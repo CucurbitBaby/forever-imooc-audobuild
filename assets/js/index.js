@@ -1,3 +1,6 @@
+angular = require('angular');
+_ = require('lodash');
+
 angular
 .module('TodoList', [])
 .controller('TodosController', require('./todos-controller.js'))
