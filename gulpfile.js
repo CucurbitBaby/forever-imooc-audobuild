@@ -5,7 +5,7 @@ var sequence = require('run-sequence');
 var watchify = require('watchify');
 
 gulp.task('default', function() {
-	sequence('mainjs');
+	sequence('vendorjs','mainjs');
 });
 
 
@@ -17,6 +17,7 @@ gulp.task('mainjs', function() {
 		packageCache: {},
 		plugin: [watchify]
 	})
+  .external('angular').external('lodash')
   
 	function bundle() {
 		b.bundle().pipe(fs.createWriteStream('js/main.js'))

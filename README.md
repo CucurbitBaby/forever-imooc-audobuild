@@ -233,6 +233,9 @@ gulp.task('mainjs', function() {
 > interview(bower都给下载后的目录里添加什么了呢?) 用WinMerge对比下有啥子区别，就多了一个bwer.json
 
 #### browerify-shim 加载第三方类库
+> 原本 assets/js/index.js 中3个Controller 打包后都会出现在main.js中。
+> 对于类库而言我们已经单独把他们打包到了vendor.js中了，避免vendor.js中的类库重复出现在main.js中。
+
 > npm install 
 
 
