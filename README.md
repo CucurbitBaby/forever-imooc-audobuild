@@ -321,9 +321,23 @@ gulp.task('mainjs', function() {
 
 ## 第5章 使用 coffeescipt 和 ES6 来优化代码
 > 本章节讲解CoffeeScript的介绍。
-### 5-1 使用 coffeescipt 和 ES6 来优化代码-1 CoffeeScript的介绍 (04:17)
-### 5-2 使用 coffeescipt 和 ES6 来优化代码-2 在gulp中将CoffeeScript编译为JavaScript (09:55)
-### 5-3 使用 coffeescipt 和 ES6 来优化代码-3 ES6的介绍和在gulp中将ES6编译为JavaScript (09:04)
+
+### 5-1 使用 coffeescipt 和 ES6 来优化代码-1 CoffeeScript的介绍
+> npm install -g js2coffee
+> js2coffee index.js --verbose --indent 4  > index.coffee
+> js2coffee todos-controller.js --verbose --indent 4  > todos-controller.coffee
+> js2coffee add-todo-controller.js --verbose --indent 4  > add-todo-controller.coffee
+> js2coffee todo-controller.js --verbose --indent 4  > todo-controller.coffee
+
+
+### 5-2 使用 coffeescipt 和 ES6 来优化代码-2 在gulp中将CoffeeScript编译为JavaScript 
+> coffee本身提供了node的工具 coffee-script
+> 我们使用 gulp-coffee
+>   npm install gulp-coffee@2.3.3
+
+
+### 5-3 使用 coffeescipt 和 ES6 来优化代码-3 ES6的介绍和在gulp中将ES6编译为JavaScript 
+
 
 ## 第6章 CSS的前端构建
 > 本章节结合实例详细讲解如何使用Gulp，结合插件进行CSS的压缩和合成，以及如何将SASS编译为CSS。
