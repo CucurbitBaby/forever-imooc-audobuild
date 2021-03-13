@@ -4,7 +4,6 @@ module.exports = ['$scope', function($scope) {
     if(!newTodo) {
       return
     }
-    
     $scope.todos.push({
       name: newTodo
     })

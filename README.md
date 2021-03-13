@@ -117,6 +117,9 @@ gulp.task('default', function() {
 > default是特殊的task，应该比较灵活取用。
 * 可以在gulp任务中调用别的任务。
 * npm install run-sequence@2.2.1
+
+#### 完整代码
+
 ```js
 // 完整 gulpfile.js
 var gulp = require('gulp');
@@ -147,14 +150,92 @@ gulp.task('watch', function() {
 
 ```
 
-### 3-5 自动化 JavaScript 构建-2 使用watchify实现自动化构建 (07:37)
+### 3-5 自动化 JavaScript 构建-2 使用watchify实现自动化构建 
+> browserify 有个插件叫 watchify，智能识别require，只要提供入口文件index.js即可。
+> 默认不会终端不会watch输出 但是文件已经生效了。
+* npm install watchify@3.11.1
+```js
+const gulp=require('gulp');
+
+var browserify = require('browserify');
+var sequence = require('run-sequence');
+var watchify = require('watchify');
+
+var fs = require('fs');
+
+
+gulp.task('default', function() {
+	sequence('mainjs');
+});
+
+gulp.task('mainjs', function() {
+	var b = browserify({
+		entries: ['assets/js/index.js'],
+		cache: {},
+		packageCache: {},
+		plugin: [watchify]
+	})
+  
+  // browserify 的 plugin中添加了 watchify 之后
+  // 它初始化结束之后，b这个对象就有一个update事件，每当源文件发生变化的时，update触发
+  // 触发后使用callback 让 browserify 再次编译即可。
+
+	// b.bundle().pipe(fs.createWriteStream('js/main.js'));
+	// b.on('update', function() {
+	// 	b.bundle().pipe(fs.createWriteStream('js/main.js'))
+	// })
+
+	function bundle() {
+		b.bundle().pipe(fs.createWriteStream('js/main.js'))
+	}
+
+	bundle();
+	b.on('update', bundle);
+
+});
+```
 
 ## 第4章 使用 Browserify 加载第三方类库
 > 本章节讲解什么是uglifyJS 前端内容的自动化构建、使用browserify来构建第三方类库、使用gulp-uglify来压缩JavaScript。
+* 构建本地JS的目的是为了模块化JS?（仅仅只是?）
+  * lodash等第三方类库文件本身就是以模块化的方式组织的。为什么还需要构建?
+  * 1. 通常不止引入一个类库，可以减少index.html中script引入的复发度。
+  * 2. 减少了http请求。
 
-### 4-1 什么是uglifyJS 前端内容的自动化构建 (05:17)
-### 4-2 使用browserify来构建第三方类库 (11:27)
+### 4-1 什么是uglifyJS 前端内容的自动化构建
+> [在线压缩](https://skalman.github.io/UglifyJS-online/)
+
+### 4-2 使用browserify来构建第三方类库
+> [bower使用](https://www.cnblogs.com/wendingding/p/9197207.html)
+> [bower常用命令](https://blog.csdn.net/o00543/article/details/53256498)
+> [bower常用命令2](https://www.jianshu.com/p/1f3cf01fb028)
+> [bower查看包的list命令好像失效了](http://www.bubuko.com/infodetail-900798.html)
+> [bower项目在其服务器上维护了受欢迎软件包的列表](https://bower.io/search/)
+> [bower的项目path中不能有中文](https://www.jianshu.com/p/6c857c3ae499) 把当前commit的文件拎出去 npm install , bower isntall ..
+> [Git速度提速 git协议换https协议](https://blog.csdn.net/helloworld0906/article/details/106374297)
+> [bower默认是用Git安装包的，Git默认速度又是很慢的](https://www.jianshu.com/p/8dad15b6018c)
+> 找不到bower的国内镜像，只能从Git或者梯子下手了。或者直接配置包的Gitee地址？
+> [官网](https://bower.io/)
+> 可以直接而指定Git地址安装，但是不能指定包名和地址安装。很烦
+> [bower国内源](https://code.i-harness.com/zh-CN/keyword/170518)
+
+* 使用bower维护angulaer lodash等第三方类库 
+  * bower install angular#1.6.2
+  * bower install lodash#4.17.4
+  * 或者  bower search lodash
+* 执行版本安装
+  * bower install --save jquery#1.2.3
+
+#### 重点
+> bower install lodash#4.17.4 能看到真实地址  https://github.com/lodash/lodash/archive/4.17.4.tar.gz
+> lodash 这个4.17.4是在tag里面能搜到的
+> 既然4.17.4.tar.gz这个地址不能单独检出，那么fork到gitee找到对应的地址即可。然后修改包名
+> interview(bower都给下载后的目录里添加什么了呢?) 用WinMerge对比下有啥子区别，就多了一个bwer.json
+
+
+
 ### 4-3 使用browserify + browserify-shim来构建第三方类库 (07:51)
+
 ### 4-4 使用gulp-uglify来压缩JavaScript (08:50)
 ### 4-5 使用gulp-if给gulp加入条件判断 (04:53)
 
