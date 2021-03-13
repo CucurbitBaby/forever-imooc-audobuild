@@ -18,15 +18,6 @@ gulp.task('mainjs', function() {
 		plugin: [watchify]
 	})
   
-  // browserify 的 plugin中添加了 watchify 之后
-  // 它初始化结束之后，b这个对象就有一个update事件，每当源文件发生变化的时，update触发
-  // 触发后使用callback 让 browserify 再次编译即可。
-
-	// b.bundle().pipe(fs.createWriteStream('js/main.js'));
-	// b.on('update', function() {
-	// 	b.bundle().pipe(fs.createWriteStream('js/main.js'))
-	// })
-
 	function bundle() {
 		b.bundle().pipe(fs.createWriteStream('js/main.js'))
 	}
@@ -36,39 +27,15 @@ gulp.task('mainjs', function() {
 
 });
 
-
-
-
-// 上一个版本
-/*
-
-var gulp = require('gulp');
-var browserify = require('browserify')
-var fs = require('fs')
-var sequence = require('run-sequence');
-var watchify = require('watchify');
-
-gulp.task('default', function() {
-	sequence('mainjs', 'watch');
+gulp.task('vendorjs', function() {
+	var b = browserify()
+  .require('./bower_components/angular/angular', {
+    expose: 'angular'
+  })
+  .require('./bower_components/lodash/dist/lodash', {
+    expose: 'lodash'
+  })
+  .bundle().pipe(fs.createWriteStream('js/vendor.js'))
 });
 
 
-
-gulp.task('mainjs', function() {
-  browserify()  // 初始化
-  .add('assets/js/index.js')  // 将js作为输入文件
-  .bundle()  // 文件流 stream
-  .pipe(fs.createWriteStream('js/main.js'))  // 输出到文件
-});
-
-
-
-gulp.task('watch', function() {
-	gulp.watch(['assets/js/*.js'], function(){
-		sequence('mainjs');
-	});
-});
-
-
-
-//*/

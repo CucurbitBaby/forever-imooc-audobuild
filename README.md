@@ -232,6 +232,8 @@ gulp.task('mainjs', function() {
 > 既然4.17.4.tar.gz这个地址不能单独检出，那么fork到gitee找到对应的地址即可。然后修改包名
 > interview(bower都给下载后的目录里添加什么了呢?) 用WinMerge对比下有啥子区别，就多了一个bwer.json
 
+#### browerify-shim 加载第三方类库
+> npm install 
 
 
 ### 4-3 使用browserify + browserify-shim来构建第三方类库 (07:51)
