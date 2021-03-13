@@ -1,0 +1,11 @@
+{
+  "name": "4.17.4",
+  "_cacheHeaders": {
+    "Content-Type": "application/zip",
+    "Content-Disposition": "attachment; filename=\"cucurbitbaby-lodash-4.17.4.zip\""
+  },
+  "_source": "https://gitee.com/cucurbitbaby/lodash/repository/archive/4.17.4.zip",
+  "_target": "*",
+  "_originalSource": "https://gitee.com/cucurbitbaby/lodash/repository/archive/4.17.4.zip",
+  "_direct": true
+}
