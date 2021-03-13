@@ -3,11 +3,12 @@ var browserify = require('browserify')
 var fs = require('fs')
 var sequence = require('run-sequence');
 var watchify = require('watchify');
+var uglify = require('gulp-uglify');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer')
 
 gulp.task('default', function() {
-	// sequence('vendorjs','mainjs');
 	sequence('mainjs');
-
 });
 
 
@@ -19,10 +20,21 @@ gulp.task('mainjs', function() {
 		packageCache: {},
 		plugin: [watchify]
 	})
-  // .external('angular').external('lodash')
   
-	function bundle() {
-		b.bundle().pipe(fs.createWriteStream('js/main.js'))
+	var bundle = function () {
+		// b.bundle().pipe(fs.createWriteStream('js/main.js'))
+		
+    
+    b
+    .bundle()
+    .pipe(source('main.js'))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(gulp.dest('./js/'))
+
+    
+
+    
 	}
 
 	bundle();

@@ -242,9 +242,28 @@ gulp.task('mainjs', function() {
 > browserify-shim 解决非CommonJS模块构建成CommonJS模块
 > npm init
 * npm install browserify-shim@3.8.13 -D
+* package.json 中 devDependencies 并级添加browserify-shim配置
+```html
+  <script type="text/javascript" src="js/main.js"></script>
+```
 ```js
+// assets/js/index.js
+angular = require('angular')
+_ = require('lodash')
+
+angular
+.module('TodoList', [])
+.controller('TodosController', require('./todos-controller.js'))
+.controller('AddTodoController', require('./add-todo-controller.js'))
+.controller('TodoController', require('./todo-controller.js'))
+
+```
+```js
+  // package.json
   "browserify": {
-    "transform": [ "browserify-shim" ]
+    "transform": [
+      "browserify-shim"
+    ]
   },
   "browserify-shim": {
     "angular": "angular",
@@ -253,12 +272,47 @@ gulp.task('mainjs', function() {
   "browser": {
     "angular": "./bower_components/angular/angular.js",
     "lodash": "./bower_components/lodash/dist/lodash.js"
-  },
+  }
 ```
-* package.json 中 devDependencies 并级添加browserify-shim配置
+* node黑科技require某个不是CommonJS规范的包时
+```js
+// angular/index.js 
+require('./angular');
+module.exports = angular;
+// 然后直接rquire(' angular/index.js ')
+```
 
-### 4-4 使用gulp-uglify来压缩JavaScript (08:50)
-### 4-5 使用gulp-if给gulp加入条件判断 (04:53)
+
+### 4-4 使用gulp-uglify来压缩JavaScript
+* npm install gulp-uglify@2.0.1
+* npm install vinyl-source-stream@2.0.0
+  * nodeStream 转为  vinylSourceStream
+* npm install vinyl-buffer@1.0.1
+  * gulp-uglify要求传入的一个buffer而不是一个stream
+```js
+gulp.task('mainjs', function() {
+	var b = browserify({
+		entries: ['assets/js/index.js'],
+		cache: {},
+		packageCache: {},
+		plugin: [watchify]
+	})
+  
+	var bundle = function () {
+		// b.bundle().pipe(fs.createWriteStream('js/main.js'))
+    b
+    .bundle()
+    .pipe(source('main.js'))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(gulp.dest('./js/'))
+	}
+
+	bundle();
+	b.on('update', bundle);
+
+});
+```
 
 ## 第5章 使用 coffeescipt 和 ES6 来优化代码
 > 本章节讲解CoffeeScript的介绍。
