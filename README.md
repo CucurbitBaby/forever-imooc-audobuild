@@ -349,7 +349,12 @@ gulp.task('mainjs', function() {
 
 ## 第6章 CSS的前端构建
 > 本章节结合实例详细讲解如何使用Gulp，结合插件进行CSS的压缩和合成，以及如何将SASS编译为CSS。
-### 6-1 minify-css的介绍和使用 gulp-clean-css 来压缩css代码 (08:08)
+
+### 6-1 minify-css的介绍和使用 gulp-clean-css 来压缩css代码
+> 移动css到asstes/css
+* npm isntall gulp-clean-css@3.0.3
+  * gulp minify-css
+
 ### 6-2 使用gulp-concat来合并css文件和css的自动化构建 (04:35)
 ### 6-3 SASS 来帮忙-1 SASS的介绍 (07:45)
 ### 6-4 SASS 来帮忙-2 使用gulp-sass来编译SASS代码 (06:36)

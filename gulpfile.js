@@ -9,6 +9,7 @@ var buffer = require('vinyl-buffer')
 var gif = require('gulp-if');
 var coffee = require('gulp-coffee')
 var babel = require('gulp-babel')
+var cleanCss = require('gulp-clean-css')
 
 // nprocess.env是node预设置
 var isProduction = process.env.ENV === 'prod';
@@ -66,4 +67,15 @@ gulp.task('babelWatch', function() {
   gulp.watch('./assets/js/*.js', function() {
     sequence('babel');
   })
+})
+
+
+gulp.task('minify-css', function() {
+  // cleanCss
+  gulp.src([
+    './assets/css/bootstrap-theme.css',
+    './assets/css/bootstrap.css',
+    './assets/css/index.css'])
+    .pipe(cleanCss())
+    .pipe(gulp.dest('css/'))
 })
