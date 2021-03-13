@@ -50234,75 +50234,58 @@ $provide.value("$locale", {
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],3:[function(require,module,exports){
-(function() {
-  module.exports = [
-    '$scope', function($scope) {
-      $scope.newTodo = '';
-      $scope.addTodo = function(newTodo) {
-        if (!newTodo) {
-          return;
-        }
-        $scope.todos.push({
-          name: newTodo
-        });
-        $scope.setTodos($scope.todos);
-        $scope.newTodo = '';
-      };
+'use strict';
+
+module.exports = ['$scope', function ($scope) {
+  $scope.newTodo = '';
+  $scope.addTodo = function (newTodo) {
+    if (!newTodo) {
+      return;
     }
-  ];
-
-}).call(this);
-
+    $scope.todos.push({
+      name: newTodo
+    });
+    $scope.setTodos($scope.todos);
+    $scope.newTodo = '';
+  };
+}];
 },{}],4:[function(require,module,exports){
-(function() {
-  var _, angular;
+'use strict';
 
-  angular = require('angular');
+angular = require('angular');
+_ = require('lodash');
 
-  _ = require('lodash');
-
-  console.log('哈哈有效果啊');
-
-  angular.module('TodoList', []).controller('TodosController', require('./todos-controller.js')).controller('AddTodoController', require('./add-todo-controller.js')).controller('TodoController', require('./todo-controller.js'));
-
-}).call(this);
-
+angular.module('TodoList', []).controller('TodosController', require('./todos-controller.js')).controller('AddTodoController', require('./add-todo-controller.js')).controller('TodoController', require('./todo-controller.js'));
 },{"./add-todo-controller.js":3,"./todo-controller.js":5,"./todos-controller.js":6,"angular":1,"lodash":2}],5:[function(require,module,exports){
-(function() {
-  module.exports = [
-    '$scope', function($scope) {
-      $scope.deleteTodo = function(deleteTodo) {
-        _.remove($scope.todos, function(todo) {
-          return todo === deleteTodo;
-        });
-        $scope.setTodos($scope.todos);
-      };
-    }
-  ];
+'use strict';
 
-}).call(this);
-
+module.exports = ['$scope', function ($scope) {
+  $scope.deleteTodo = function (deleteTodo) {
+    _.remove($scope.todos, function (todo) {
+      return todo === deleteTodo;
+    });
+    $scope.setTodos($scope.todos);
+  };
+}];
 },{}],6:[function(require,module,exports){
-(function() {
-  module.exports = [
-    '$scope', function($scope) {
-      $scope.setTodos = function(todos) {
-        localStorage.setItem('todos', JSON.stringify(todos));
-      };
-      $scope.getTodos = function() {
-        var todos;
-        todos = localStorage.getItem('todos');
-        if (todos) {
-          todos = JSON.parse(todos);
-        } else {
-          todos = [];
-        }
-        return todos;
-      };
-      $scope.todos = $scope.getTodos();
+'use strict';
+
+module.exports = ['$scope', function ($scope) {
+  $scope.setTodos = function (todos) {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  };
+
+  $scope.getTodos = function () {
+    var todos = localStorage.getItem('todos');
+    console.log(todos);
+    if (todos) {
+      todos = JSON.parse(todos);
+    } else {
+      todos = [];
     }
-  ];
+    return todos;
+  };
 
-}).call(this);
-
+  $scope.todos = $scope.getTodos();
+}];
 },{}]},{},[4]);

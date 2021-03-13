@@ -8,11 +8,12 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer')
 var gif = require('gulp-if');
 var coffee = require('gulp-coffee')
+var babel = require('gulp-babel')
 
 // nprocess.env是node预设置
 var isProduction = process.env.ENV === 'prod';
 gulp.task('default', function() {
-	sequence('coffee', 'coffeeWatch', 'mainjs');
+	sequence('babel', 'babelWatch', 'mainjs');
 });
 
 gulp.task('mainjs', function() {
@@ -50,5 +51,19 @@ gulp.task('coffee', function() {
 gulp.task('coffeeWatch', function() {
   gulp.watch('./assets/js/*.coffee', function() {
     sequence('coffee');
+  })
+})
+
+gulp.task('babel', function() {
+  // 讲coffee文件编译为JS文件
+  gulp.src('./assets/js/*.js')
+  .pipe(babel({presets: ["es2015"]}))
+  .pipe(gulp.dest('./build/js/'))
+})
+
+
+gulp.task('babelWatch', function() {
+  gulp.watch('./assets/js/*.js', function() {
+    sequence('babel');
   })
 })

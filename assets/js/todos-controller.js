@@ -1,10 +1,11 @@
-module.exports = ['$scope', function($scope) {
-  $scope.setTodos = function(todos) {
+module.exports = ['$scope', ($scope) => {
+  $scope.setTodos = (todos) => {
     localStorage.setItem('todos', JSON.stringify(todos))
   }
   
-  $scope.getTodos = function() {
-    todos = localStorage.getItem('todos')
+  $scope.getTodos = () => {
+    let todos = localStorage.getItem('todos')
+    console.log(todos)
     if(todos) {
       todos = JSON.parse(todos)
     } else {
@@ -12,6 +13,6 @@ module.exports = ['$scope', function($scope) {
     }
     return todos
   }
-
+ 
   $scope.todos = $scope.getTodos();
 }]

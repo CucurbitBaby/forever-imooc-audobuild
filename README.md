@@ -337,7 +337,15 @@ gulp.task('mainjs', function() {
 
 
 ### 5-3 使用 coffeescipt 和 ES6 来优化代码-3 ES6的介绍和在gulp中将ES6编译为JavaScript 
-
+> npm install gulp-babel@6.1.2
+> babel比较特殊，支持很多其他语言呢，需要配置。
+> npm install babel-preset-es2015@6.24.1
+```js
+// .babelrc
+{
+	"presets": ["es2015"]
+}
+```
 
 ## 第6章 CSS的前端构建
 > 本章节结合实例详细讲解如何使用Gulp，结合插件进行CSS的压缩和合成，以及如何将SASS编译为CSS。
