@@ -1,5 +1,5 @@
 angular
 .module('TodoList', [])
-.controller('TodosController', todosController)
-.controller('AddTodoController', addTodoController)
-.controller('TodoController', todoController)
+.controller('TodosController', require('./todos-controller.js'))
+.controller('AddTodoController', require('./add-todo-controller.js'))
+.controller('TodoController', require('./todo-controller.js'))
