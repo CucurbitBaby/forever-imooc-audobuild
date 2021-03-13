@@ -314,6 +314,11 @@ gulp.task('mainjs', function() {
 });
 ```
 
+### 4-5 使用gulp-if给gulp加入条件判断
+> npm install gulp-if@2.0.2
+> 直接执行gulp 实际是dev环境 并不是prod
+> ENV=prod gulp 就是进入if进行压缩。
+
 ## 第5章 使用 coffeescipt 和 ES6 来优化代码
 > 本章节讲解CoffeeScript的介绍。
 ### 5-1 使用 coffeescipt 和 ES6 来优化代码-1 CoffeeScript的介绍 (04:17)

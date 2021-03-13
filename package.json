@@ -13,6 +13,7 @@
   "dependencies": {
     "browserify": "^13.3.0",
     "gulp": "^3.9.1",
+    "gulp-if": "^2.0.2",
     "gulp-uglify": "^2.0.1",
     "run-sequence": "^1.2.2",
     "vinyl-buffer": "^1.0.1",
