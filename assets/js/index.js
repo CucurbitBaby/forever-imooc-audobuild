@@ -1,5 +1,5 @@
-angular = require('angular');
-_ = require('lodash');
+angular = require('angular')
+_ = require('lodash')
 
 angular
 .module('TodoList', [])

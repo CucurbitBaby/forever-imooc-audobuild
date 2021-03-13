@@ -5,7 +5,9 @@ var sequence = require('run-sequence');
 var watchify = require('watchify');
 
 gulp.task('default', function() {
-	sequence('vendorjs','mainjs');
+	// sequence('vendorjs','mainjs');
+	sequence('mainjs');
+
 });
 
 
@@ -17,7 +19,7 @@ gulp.task('mainjs', function() {
 		packageCache: {},
 		plugin: [watchify]
 	})
-  .external('angular').external('lodash')
+  // .external('angular').external('lodash')
   
 	function bundle() {
 		b.bundle().pipe(fs.createWriteStream('js/main.js'))
@@ -27,16 +29,3 @@ gulp.task('mainjs', function() {
 	b.on('update', bundle);
 
 });
-
-gulp.task('vendorjs', function() {
-	var b = browserify()
-  .require('./bower_components/angular/angular', {
-    expose: 'angular'
-  })
-  .require('./bower_components/lodash/dist/lodash', {
-    expose: 'lodash'
-  })
-  .bundle().pipe(fs.createWriteStream('js/vendor.js'))
-});
-
-

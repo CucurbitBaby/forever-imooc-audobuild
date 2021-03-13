@@ -232,14 +232,30 @@ gulp.task('mainjs', function() {
 > 既然4.17.4.tar.gz这个地址不能单独检出，那么fork到gitee找到对应的地址即可。然后修改包名
 > interview(bower都给下载后的目录里添加什么了呢?) 用WinMerge对比下有啥子区别，就多了一个bwer.json
 
-#### browerify-shim 加载第三方类库
+#### 操作
 > 原本 assets/js/index.js 中3个Controller 打包后都会出现在main.js中。
 > 对于类库而言我们已经单独把他们打包到了vendor.js中了，避免vendor.js中的类库重复出现在main.js中。
+> 最终还是不行，_是可以了，angular这类不是CommonJS规范定义的类库还是不行的。
 
-> npm install 
 
-
-### 4-3 使用browserify + browserify-shim来构建第三方类库 (07:51)
+### 4-3 使用browserify + browserify-shim来构建第三方类库
+> browserify-shim 解决非CommonJS模块构建成CommonJS模块
+> npm init
+* npm install browserify-shim@3.8.13 -D
+```js
+  "browserify": {
+    "transform": [ "browserify-shim" ]
+  },
+  "browserify-shim": {
+    "angular": "angular",
+    "lodash": "_"
+  },
+  "browser": {
+    "angular": "./bower_components/angular/angular.js",
+    "lodash": "./bower_components/lodash/dist/lodash.js"
+  },
+```
+* package.json 中 devDependencies 并级添加browserify-shim配置
 
 ### 4-4 使用gulp-uglify来压缩JavaScript (08:50)
 ### 4-5 使用gulp-if给gulp加入条件判断 (04:53)

@@ -1,0 +1,36 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cross-env ENV=prod gulp"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "browserify": "^13.3.0",
+    "gulp": "^3.9.1",
+    "run-sequence": "^1.2.2",
+    "watchify": "^3.11.1"
+  },
+  "devDependencies": {
+    "browserify-shim": "^3.8.13",
+    "lodash": "^4.17.4"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "angular": "angular",
+    "lodash": "_"
+  },
+  "browser": {
+    "angular": "./bower_components/angular/angular.js",
+    "lodash": "./bower_components/lodash/dist/lodash.js"
+  }
+}
