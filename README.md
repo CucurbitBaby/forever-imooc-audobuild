@@ -357,9 +357,10 @@ gulp.task('mainjs', function() {
 
 ### 6-2 使用gulp-concat来合并css文件和css的自动化构建
 * npm install gulp-concat@2.6.1
-  
 
-### 6-3 SASS 来帮忙-1 SASS的介绍 (07:45)
+### 6-3 SASS 来帮忙-1 SASS的介绍
+
+
 ### 6-4 SASS 来帮忙-2 使用gulp-sass来编译SASS代码 (06:36)
 ### 6-5 总结 (02:02)
 
