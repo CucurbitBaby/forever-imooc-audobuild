@@ -29,7 +29,6 @@ module.exports = ['$scope', function($scope) {
     $scope.setTodos($scope.todos)
   }
 }]
-
 },{}],4:[function(require,module,exports){
 module.exports = ['$scope', function($scope) {
   $scope.setTodos = function(todos) {

@@ -83,7 +83,8 @@
 ### 3-3 使用gulp进行构建-3 使用gulp进行构建
 
 #### node中使用shell脚本
-* node中执行一个shell脚本，需要 shelljs,  npm install shelljs@0.7.6
+* node中执行一个shell脚本，需要 shelljs模块
+  * npm install shelljs@0.7.6
 ```js
 var gulp = require('gulp');
 var shelljs = require('shelljs')
@@ -106,7 +107,46 @@ gulp.task('default', function() {
 
 ```
 
-### 3-4 自动化 JavaScript 构建-1 使用gulp.watch实现自动化构建- (08:15)
+### 3-4 自动化 JavaScript 构建-1 使用gulp.watch实现自动化构建
+> 如何把gulp任务自动化
+
+#### gulp watch
+* 目前src源文件和main.js打包后文件同在一个目录不好监听整个目录。拆分一下 src文件转移到 \asssets\js
+
+#### gulp default
+> default是特殊的task，应该比较灵活取用。
+* 可以在gulp任务中调用别的任务。
+* npm install run-sequence@2.2.1
+```js
+// 完整 gulpfile.js
+var gulp = require('gulp');
+var browserify = require('browserify')
+var fs = require('fs')
+var sequence = require('run-sequence');
+
+gulp.task('default', function() {
+	sequence('mainjs', 'watch');
+});
+
+
+
+gulp.task('mainjs', function() {
+  browserify()  // 初始化
+  .add('assets/js/index.js')  // 将js作为输入文件
+  .bundle()  // 文件流 stream
+  .pipe(fs.createWriteStream('js/main.js'))  // 输出到文件
+});
+
+
+
+gulp.task('watch', function() {
+	gulp.watch(['assets/js/*.js'], function(){
+		sequence('mainjs');
+	});
+});
+
+```
+
 ### 3-5 自动化 JavaScript 构建-2 使用watchify实现自动化构建 (07:37)
 
 ## 第4章 使用 Browserify 加载第三方类库
@@ -132,7 +172,7 @@ gulp.task('default', function() {
 ### 6-4 SASS 来帮忙-2 使用gulp-sass来编译SASS代码 (06:36)
 ### 6-5 总结 (02:02)
 
- # 书签
+# 书签
 
- # 扩展
- ## angular 初级学习
+# 扩展
+## angular 初级学习
