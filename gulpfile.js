@@ -11,11 +11,12 @@ var coffee = require('gulp-coffee')
 var babel = require('gulp-babel')
 var cleanCss = require('gulp-clean-css')
 var concat = require('gulp-concat')
+var sass = require('gulp-sass')
 
 // nprocess.env是node预设置
 var isProduction = process.env.ENV === 'prod';
 gulp.task('default', function() {
-	sequence('minify-css', 'minify-css-watch', 'babel', 'babelWatch', 'mainjs');
+	sequence('sass', 'sass-watch', 'babel', 'babelWatch', 'mainjs');
 });
 
 gulp.task('mainjs', function() {
@@ -84,4 +85,16 @@ gulp.task('minify-css', function() {
 
 gulp.task('minify-css-watch', function() {
   gulp.watch('./assets/css/*.css', ['minify-css'])
+})
+
+gulp.task('sass', function() {
+  gulp.src('./assets/css/main.scss')
+  .pipe(sass())
+  .pipe(gif(isProduction, cleanCss()))
+  .pipe(gulp.dest('css/'))
+})
+
+
+gulp.task('sass-watch', function() {
+  gulp.watch('./assets/css/*.scss', ['sass'])
 })

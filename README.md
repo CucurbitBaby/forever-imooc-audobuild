@@ -359,9 +359,17 @@ gulp.task('mainjs', function() {
 * npm install gulp-concat@2.6.1
 
 ### 6-3 SASS 来帮忙-1 SASS的介绍
+> interview(node-sass安装失败的原因以及解决方案)
+> cnpm install gulp-sass
+```scss
+// assets/css/index.scss
+@import 'bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
+@import 'index';
+```
+
+### 6-4 SASS 来帮忙-2 使用gulp-sass来编译SASS代码
 
 
-### 6-4 SASS 来帮忙-2 使用gulp-sass来编译SASS代码 (06:36)
 ### 6-5 总结 (02:02)
 
 # 书签
